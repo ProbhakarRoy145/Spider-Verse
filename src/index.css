@@ -1,0 +1,322 @@
+@import "tailwindcss";
+
+/* ===== CUSTOM SPIDER CURSOR ===== */
+* {
+  cursor: none !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0a;
+  overflow-x: hidden;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #e23636;
+  border-radius: 3px;
+}
+
+/* ===== SPIDER CURSOR STYLES ===== */
+.spider-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #e23636;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 100000;
+  transition: transform 0.1s;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(226, 54, 54, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+.cursor-ring.hovering {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(226, 54, 54, 0.9);
+}
+
+.cursor-web-line {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(226, 54, 54, 0.6), transparent);
+  transform-origin: top center;
+}
+
+/* ===== WEB PATTERN BACKGROUND ===== */
+.web-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.03;
+  background-image:
+    radial-gradient(circle at center, transparent 0%, transparent 30%, rgba(226,54,54,0.1) 30.5%, transparent 31%),
+    radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(226,54,54,0.08) 50.5%, transparent 51%),
+    radial-gradient(circle at center, transparent 0%, transparent 70%, rgba(226,54,54,0.06) 70.5%, transparent 71%);
+  background-size: 300px 300px;
+}
+
+/* ===== GLITCH TEXT ===== */
+.glitch {
+  position: relative;
+  animation: glitch-skew 4s infinite linear alternate-reverse;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  color: #00f0ff;
+  animation: glitch-effect 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  transform: translate(-2px);
+}
+
+.glitch::after {
+  color: #e23636;
+  animation: glitch-effect 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  transform: translate(2px);
+}
+
+@keyframes glitch-effect {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-0.5deg); }
+  40% { transform: skew(0.5deg); }
+  60% { transform: skew(0deg); }
+  80% { transform: skew(-0.3deg); }
+  100% { transform: skew(0deg); }
+}
+
+/* ===== FLOATING PARTICLES ===== */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #e23636;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ===== HERO ===== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(30,0,0,0.7) 50%, rgba(10,10,10,0.9) 100%);
+  z-index: 1;
+}
+
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.8) contrast(1.2);
+}
+
+/* ===== CARD GLOW ===== */
+.card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, #e23636, transparent, transparent);
+  animation: rotate-glow 4s linear infinite;
+  z-index: -1;
+}
+
+.card-glow::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #111;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+@keyframes rotate-glow {
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== REVEAL ===== */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* ===== WEB SHOOTING LINE ===== */
+.web-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(226,54,54,0.8), rgba(255,255,255,0.9), rgba(226,54,54,0.8), transparent);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* ===== PARALLAX IMAGE ===== */
+.parallax-img {
+  transition: transform 0.1s ease-out;
+}
+
+/* ===== NAV ===== */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #e23636;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: translateX(0);
+}
+
+/* ===== IMAGE MASK ===== */
+.spider-mask {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* ===== SECTION DIVIDER ===== */
+.section-divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e23636, transparent);
+  opacity: 0.5;
+}
+
+/* ===== MARQUEE ===== */
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== SPIDER WEB CORNER ===== */
+.web-corner {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0.1;
+}
+
+.web-corner svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== GALLERY TILT ===== */
+.gallery-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.gallery-card:hover {
+  box-shadow: 0 20px 60px rgba(226, 54, 54, 0.3);
+}
+
+/* ===== COUNTER ===== */
+.stat-number {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+}
+
+/* ===== RESPONSIVE VIDEO MASK ===== */
+@media (max-width: 768px) {
+  .spider-mask {
+    clip-path: none;
+    border-radius: 1rem;
+  }
+}
